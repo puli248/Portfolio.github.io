@@ -34,15 +34,7 @@ function checkIn() {
     let batch = document.getElementById("batch").value;
     
 
-    if (name === "" || email === "") {
-        alert("Please fill all fields!");
-        return;
-    }
-    if(faculty === "" || studentid === "") {
-        alert("Please fill all fields!");
-        return;
-    }
-    if (batch === "") {
+    if (name === "" || email === "" || faculty === "" || studentid === "" || batch === "") {
         alert("Please fill all fields!");
         return;
     }
