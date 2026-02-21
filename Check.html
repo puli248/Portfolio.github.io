@@ -14,10 +14,9 @@
 
     <input type="text" id="name"class="containercheck"placeholder="Enter your name">
     <input type="email" id="email" class="containercheck"placeholder="Enter your email"><br><br>
-    <input type="text" id="name"class="containercheck"placeholder="Enter Faculy">
-    <input type="email" id="email" class="containercheck"placeholder="Enter Student id"><br><br>
-    <input type="text" id="name"class="containercheck"placeholder="Enter Batch">
-    <input type="email" id="email" class="containercheck"placeholder="Enter City">
+    <input type="text" id="faculty"class="containercheck"placeholder="Enter Faculy">
+    <input type="text" id="studentid" class="containercheck"placeholder="Enter Student id"><br><br>
+    <input type="text" id="batch"class="containercheck"placeholder="Enter Batch">
 
     <button onclick="checkIn()"class="butt">✅ Check In</button>
 
@@ -30,8 +29,12 @@
 function checkIn() {
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
+    let faculty = document.getElementById("faculty").value;
+    let studentid = document.getElementById("studentid").value;
+    let batch = document.getElementById("batch").value;
+    
 
-    if (name === "" || email === "") {
+    if (name === "" || email === "" || faculty === "" || studentid === "" || batch === "") {
         alert("Please fill all fields!");
         return;
     }
@@ -39,10 +42,13 @@ function checkIn() {
     document.getElementById("message").innerText = "Successfully Checked In! 🎉";
 
     let list = document.getElementById("checkInList");
-    list.innerHTML += "<p>✔ " + name + " (" + email + ")</p>";
+    list.innerHTML += "<p>✔ " + name + " (" + email + faculty + studentid + batch ")</p>";
 
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
+    document.getElementById("faculty").value = "";
+    document.getElementById("studentid").value = "";
+    document.getElementById("batch").value = "";
 }
 </script>
     <button style="padding: 15px; height: 4%; background-color: #005EB8; border-radius: 30px;"> <a href="index.html" style="color: blanchedalmond;">Back to Home </a></button>
