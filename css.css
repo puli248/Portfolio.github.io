@@ -175,7 +175,7 @@ h2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
-    padding: 30px;
+    padding: 40px;
 }
 
 
@@ -255,3 +255,4 @@ h2 {
     color: var(--accent);
 
 }
+
