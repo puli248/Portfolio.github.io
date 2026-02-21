@@ -404,14 +404,14 @@
         }
         function toggleJoin(button) {
 
-    if (button.classList.contains("btn-join")) {
-        button.innerHTML = "✓ Joined";
-        button.classList.remove("btn-join");
-        button.classList.add("btn-joined");
-    } else {
-        button.innerHTML = "+ Join";
-        button.classList.remove("btn-joined");
-        button.classList.add("btn-join");
+         if (button.classList.contains("btn-join")) {
+             button.innerHTML = "✓ Joined";
+             button.classList.remove("btn-join");
+             button.classList.add("btn-joined");
+         } else {
+             button.innerHTML = "+ Join";
+             button.classList.remove("btn-joined");
+             button.classList.add("btn-join");
     }
 
 }
