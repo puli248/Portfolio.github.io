@@ -422,9 +422,12 @@
          } else {
 
              let confirmLeave = confirm("Are you sure you want to leave this club?");
-             button.innerHTML = "+ Join";
-             button.classList.remove("btn-joined");
-             button.classList.add("btn-join");
+             if (confirmLeave == true) {
+                 
+                 button.innerHTML = "+ Join";
+                 button.classList.remove("btn-joined");
+                 button.classList.add("btn-join");
+         }
     }
 
 }
