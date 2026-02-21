@@ -253,12 +253,16 @@ h2 {
     background: var(--accent);
     color: #000;
 }
+.butt{
+    border-radius: 14px
+}
 
 .btn-join {
     background: transparent;
     color: var(--accent);
 
 }
+
 
 
 
