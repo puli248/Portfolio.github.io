@@ -175,6 +175,7 @@ h2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
+    padding: 30px;
 }
 
 
@@ -252,4 +253,5 @@ h2 {
 .btn-join {
     background: transparent;
     color: var(--accent);
+
 }
