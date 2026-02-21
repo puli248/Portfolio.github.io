@@ -392,11 +392,12 @@
     <script>
     const hour = new Date().getHours(); 
          let greeting;
+         let student = student;
 
          if (hour < 18) {
-         greeting = "Good day";
+         greeting = "Good day" + " , " + student;
          } else {
-         greeting = "Good evening";
+         greeting = "Good evening" + " , " + student;
 }
 
          document.getElementById("live").innerHTML = greeting;
