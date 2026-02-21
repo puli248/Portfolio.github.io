@@ -409,6 +409,8 @@
              button.classList.remove("btn-join");
              button.classList.add("btn-joined");
          } else {
+
+             let confirmLeave = confirm("Are you sure you want to leave this club?");
              button.innerHTML = "+ Join";
              button.classList.remove("btn-joined");
              button.classList.add("btn-join");
