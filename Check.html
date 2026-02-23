@@ -42,30 +42,7 @@ function checkIn() {
         return;
     }
     alert(`✔ Successfully Checked In!
-    
-Name: ${name}
-Email: ${email}
-Faculty: ${faculty}
-Student ID: ${studentid}
-Batch: ${batch}`);
 
-    let list = document.getElementById("checkInList");
-
-    let newItem = document.createElement("div");
-    newItem.style.padding = "10px";
-    newItem.style.marginTop = "8px";
-    newItem.style.backgroundColor = "#f0f8ff";
-    newItem.style.borderRadius = "5px";
-
-    newItem.innerHTML = `✔ ${name} (${email} | ${faculty} | ${studentid} | ${batch})`;
-
-    list.appendChild(newItem);
-
-    document.getElementById("name").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("faculty").value = "";
-    document.getElementById("studentid").value = "";
-    document.getElementById("batch").value = "";
 }
 </script>
 </body>
