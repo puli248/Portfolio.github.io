@@ -248,6 +248,9 @@ h2 {
     cursor: pointer;
     border: 1px solid var(--accent);
 }
+#message{
+    display; none;
+}
 
 .btn-joined {
     background: var(--accent);
@@ -262,6 +265,7 @@ h2 {
     color: var(--accent);
 
 }
+
 
 
 
