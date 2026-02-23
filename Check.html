@@ -41,8 +41,6 @@ function checkIn() {
         alert("Please fill all fields!");
         return;
     }
-
-    // ✅ Success alert
     alert(`✔ Successfully Checked In!
     
 Name: ${name}
@@ -63,7 +61,6 @@ Batch: ${batch}`);
 
     list.appendChild(newItem);
 
-    // Clear inputs
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
     document.getElementById("faculty").value = "";
