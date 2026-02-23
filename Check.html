@@ -48,7 +48,7 @@ function checkIn() {
     document.getElementById("message").innerText = "Successfully Checked In! 🎉";
 
     let list = document.getElementById("checkInList");
-    list.innerHTML += "<p>✔ " + name + " (" + email + " | " + faculty + " | " + studentid + " | " + batch + ")</p>";
+    list.innerHTML += "<p style="text-align: center; color: white;">✔ " + name + " (" + email + " | " + faculty + " | " + studentid + " | " + batch + ")</p>";
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
     document.getElementById("faculty").value = "";
