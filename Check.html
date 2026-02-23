@@ -45,25 +45,24 @@ function checkIn() {
         return;
     }
 
-    // Success message
-    document.getElementById("message").innerText = "Successfully Checked In! 🎉";
+    // ✅ Success alert
+    alert(`✔ Successfully Checked In!
+    
+Name: ${name}
+Email: ${email}
+Faculty: ${faculty}
+Student ID: ${studentid}
+Batch: ${batch}`);
 
     let list = document.getElementById("checkInList");
 
-    // Create new check-in item
     let newItem = document.createElement("div");
     newItem.style.padding = "10px";
     newItem.style.marginTop = "8px";
     newItem.style.backgroundColor = "#f0f8ff";
     newItem.style.borderRadius = "5px";
-    newItem.style.display = "flex";
-    newItem.style.justifyContent = "space-between";
-    newItem.style.alignItems = "center";
 
-    newItem.innerHTML = `
-        <span>✔ ${name} (${email} | ${faculty} | ${studentid} | ${batch})</span>
-        <button onclick="removeCheckIn(this)" style="background:red;color:white;border:none;padding:5px 8px;border-radius:4px;cursor:pointer;">X</button>
-    `;
+    newItem.innerHTML = `✔ ${name} (${email} | ${faculty} | ${studentid} | ${batch})`;
 
     list.appendChild(newItem);
 
@@ -73,12 +72,6 @@ function checkIn() {
     document.getElementById("faculty").value = "";
     document.getElementById("studentid").value = "";
     document.getElementById("batch").value = "";
-}
-
-
-// Remove function
-function removeCheckIn(button) {
-    button.parentElement.remove();
 }
 </script>
 </body>
