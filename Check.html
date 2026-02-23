@@ -47,8 +47,11 @@ function checkIn() {
 
     document.getElementById("message").innerText = "Successfully Checked In! 🎉";
 
-    let list = document.getElementById("checkInList");
-    list.innerHTML += "<p style="text-align: center; color: white;">✔ " + name + " (" + email + " | " + faculty + " | " + studentid + " | " + batch + ")</p>";
+    let list = document.getElementById("checkInList")
+        
+    list.addEventListener("click", function (){
+        alert(✔ " + name + " (" + email + " | " + faculty + " | " + studentid + " | " + batch + ")
+    });
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
     document.getElementById("faculty").value = "";
