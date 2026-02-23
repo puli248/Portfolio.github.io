@@ -280,7 +280,7 @@
                 <div id="openes"class="card">
                     <div style="font-size: 24px;">💪</div>
                     <small style="color: var(--text-dim); font-weight: bold; font-size: 10px;">FITNESS CENTER</small>
-                    <div id="open" style="color: var(--success); font-weight: bold; margin-top: 5px;">Open Now</div>
+                    <div id="open" style="color: var(--success); font-weight: bold; margin-top: 5px;"></div>
                 </div>
                 <div class="card">
                     <div style="font-size: 24px;">🚌</div>
@@ -407,9 +407,9 @@
          let student = "student";
 
          if (hour < 16) {
-         available = "Good day";
+         available = "Open";
          } else {
-         available = "Good evening";
+         available = "Closed";
 }
 
          document.getElementById("open").innerHTML = avalable;
