@@ -2,466 +2,2026 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus Hub - CINEC</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CINEC Campus — Student Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
          :root {
-            --bg-dark: #070d19;
-            --card-bg: #005EB8;
-            --accent: #bfd7ee;
-            --text-main: #ffffff;
-            --text-dim: #ffffff;
-            --success: #22c55e;
-            --warning: #ef1515;
-            --transit-blue: #005EB8;
+            --navy: #003087;
+            --navy-dark: #001f5c;
+            --navy-deeper: #000e35;
+            --navy-mid: #0a1a4a;
+            --blue-accent: #1a56d6;
+            --sky: #4f8ef7;
+            --sky-soft: #7aaeff;
+            --gold: #f5b800;
+            --gold-dark: #c99200;
+            --white: #ffffff;
+            --off-white: #f4f7fb;
+            --text-muted: #6b7a9e;
+            --border: #dde3f0;
+            --sidebar-w: 260px;
         }
         
-        * body {
-            background: linear-gradient(180deg, #005EB8 0%, #ffffff 100%);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
+        html,
+        body {
+            height: 100%;
+            font-family: 'Outfit', sans-serif;
+            background: var(--off-white);
+        }
+        /* ════════════════════════════════════════
+       TOP UTILITY BAR
+    ════════════════════════════════════════ */
+        
+        .util-bar {
+            background: #f0f4fb;
+            border-bottom: 1px solid var(--border);
+            padding: 6px 32px;
             display: flex;
-            justify-content: center;
-            background-size: cover;
-            opacity: 0.95;
-            min-height: 100vh;
-        }
-        
-        .app-container {
-            width: 100%;
-            max-width: 4000px;
-            padding-bottom: 40px;
-        }
-        /* --- Header Section --- */
-        
-        .welcome-text {
-            font-size: 11px;
-            color: var(--text-dim);
-            margin: 0;
-            letter-spacing: 1px;
-            font-weight: bold;
-        }
-        
-        .user-name {
-            font-size: 34px;
-            font-weight: 800;
-            margin: 5px 0 20px 0;
-            line-height: 1.1;
-        }
-        
-        .gold-text {
-            color: var(--accent);
-        }
-        /* --- Engagement Points Card --- */
-        
-        .points-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            justify-content: flex-end;
+            gap: 4px;
         }
         
-        .check-in-btn {
-            background: var(--accent);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-weight: 900;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(243, 176, 50, 0.3);
+        .util-bar a {
+            color: #444c6e;
+            font-size: 12px;
+            text-decoration: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            transition: background .15s, color .15s;
+            font-weight: 500;
         }
-        /* --- Navigation Bar --- */
         
-        .nav-grid {
+        .util-bar a:hover {
+            background: var(--navy);
+            color: #fff;
+        }
+        
+        .util-bar .sep {
+            color: #ccc;
+            font-size: 11px;
+        }
+        /* ════════════════════════════════════════
+       LOGO HEADER
+    ════════════════════════════════════════ */
+        
+        .logo-header {
+            background: #fff;
+            padding: 12px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+        
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        
+        .logo-img-box {
+            width: 120px;
+            height: 80px;
+            background: transparent;
+            border-radius: 0;
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            place-items: center;
+            overflow: hidden;
+            border: none;
+        }
+        
+        .logo-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+            /* removes the dark navy bg on white header */
+            filter: contrast(1.05);
+        }
+        /* fallback text logo if no image */
+        
+        .logo-emblem {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(145deg, var(--navy) 0%, var(--navy-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(0, 48, 135, 0.3);
+        }
+        
+        .logo-emblem .star {
+            font-size: 24px;
+            color: #fff;
+        }
+        
+        .logo-text-block {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text-block .logo-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: 0.04em;
+            line-height: 1;
+        }
+        
+        .logo-text-block .logo-title span {
+            color: var(--blue-accent);
+        }
+        
+        .logo-text-block .logo-sub {
+            font-size: 12px;
+            color: var(--navy);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin-top: 0;
+        }
+        
+        .logo-text-block .logo-tag {
+            font-size: 10.5px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .header-search {
+            display: flex;
+            align-items: center;
             gap: 8px;
-            margin-bottom: 30px;
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 14px;
+        }
+        
+        .header-search input {
+            border: none;
+            background: transparent;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            color: #333;
+            outline: none;
+            width: 180px;
+        }
+        
+        .header-search input::placeholder {
+            color: #aaa;
+        }
+        
+        .header-search button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--navy);
+        }
+        /* ════════════════════════════════════════
+       MAIN NAV BAR
+    ════════════════════════════════════════ */
+        
+        .main-nav {
+            background: var(--navy);
+            padding: 0 32px;
+            display: flex;
+            align-items: stretch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 16px rgba(0, 0, 0, 0.2);
         }
         
         .nav-item {
-            background: var(--card-bg);
-            padding: 15px 2px;
-            border-radius: 15px;
-            text-align: center;
-            font-size: 9px;
-            font-weight: bold;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: 0.2s;
+            position: relative;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 16px 16px;
+            display: flex;
             align-items: center;
             gap: 5px;
+            white-space: nowrap;
+            transition: background .2s, color .2s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: 'Outfit', sans-serif;
         }
         
-        .nav-item.active {
-            background: var(--accent);
-            color: #000;
-            border-color: var(--accent);
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
         }
-        /* --- Page Switching Logic --- */
         
-        .page-content {
+        .nav-link .caret {
+            font-size: 9px;
+            opacity: 0.6;
+        }
+        /* dropdown */
+        
+        .dropdown {
             display: none;
-            animation: fadeIn 0.3s ease;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            min-width: 200px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            border-top: 3px solid var(--gold);
+            z-index: 200;
         }
         
-        .page-content.active {
+        .nav-item:hover .dropdown {
             display: block;
         }
         
-        @keyframes fadeIn {
+        .dropdown a {
+            display: block;
+            padding: 10px 18px;
+            color: #333;
+            font-size: 13px;
+            text-decoration: none;
+            transition: background .15s, color .15s;
+            font-weight: 500;
+        }
+        
+        .dropdown a:hover {
+            background: var(--off-white);
+            color: var(--navy);
+            padding-left: 24px;
+        }
+        /* gold highlight for active nav */
+        
+        .nav-link.gold-active {
+            background: rgba(245, 184, 0, 0.15);
+            color: var(--gold);
+            border-bottom: 3px solid var(--gold);
+        }
+        /* ════════════════════════════════════════
+       ── LOGIN PAGE ──
+    ════════════════════════════════════════ */
+        
+        #loginPage {
+            min-height: calc(100vh - 150px);
+            position: relative;
+            display: flex;
+            align-items: stretch;
+        }
+        
+        .login-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background: url('R.png') center center / cover no-repeat;
+        }
+        
+        .login-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(130deg, rgba(0, 10, 40, 0.88) 0%, rgba(0, 25, 75, 0.65) 50%, rgba(0, 10, 40, 0.85) 100%);
+        }
+        
+        .login-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background-image: linear-gradient(rgba(79, 142, 247, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(79, 142, 247, 0.05) 1px, transparent 1px);
+            background-size: 52px 52px;
+        }
+        
+        .login-inner {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 460px;
+        }
+        /* Hero side */
+        
+        .login-hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 56px 64px;
+            animation: fadeUp 0.9s cubic-bezier(.22, 1, .36, 1) both;
+        }
+        
+        .lh-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(79, 142, 247, 0.14);
+            border: 1px solid rgba(79, 142, 247, 0.32);
+            color: var(--sky-soft);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 22px;
+            width: fit-content;
+        }
+        
+        .lh-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--sky-soft);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .login-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3.2vw, 3.2rem);
+            color: #fff;
+            line-height: 1.12;
+            margin-bottom: 18px;
+        }
+        
+        .login-hero h1 em {
+            font-style: italic;
+            color: var(--sky-soft);
+        }
+        
+        .login-hero p {
+            color: rgba(255, 255, 255, 0.50);
+            font-size: 1rem;
+            line-height: 1.72;
+            margin-bottom: 36px;
+        }
+        
+        .lh-features {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+        
+        .lh-feat {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 12px 18px;
+            transition: background .2s, border-color .2s;
+        }
+        
+        .lh-feat:hover {
+            background: rgba(79, 142, 247, 0.09);
+            border-color: rgba(79, 142, 247, 0.22);
+        }
+        
+        .lh-feat .fi {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .lh-feat strong {
+            display: block;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .lh-feat span {
+            color: rgba(255, 255, 255, 0.38);
+            font-size: 12px;
+        }
+        
+        .lh-foot {
+            color: rgba(255, 255, 255, 0.20);
+            font-size: 12px;
+        }
+        /* Login panel */
+        
+        .login-panel {
+            background: rgba(5, 12, 40, 0.88);
+            backdrop-filter: blur(36px);
+            -webkit-backdrop-filter: blur(36px);
+            border-left: 1px solid rgba(79, 142, 247, 0.14);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 52px 48px;
+            animation: slideInR 0.8s cubic-bezier(.22, 1, .36, 1) 0.1s both;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .login-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        .lp-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245, 184, 0, 0.12);
+            border: 1px solid rgba(245, 184, 0, 0.3);
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 22px;
+            width: fit-content;
+        }
+        
+        .login-panel h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        
+        .lp-sub {
+            color: rgba(255, 255, 255, 0.40);
+            font-size: 13.5px;
+            margin-bottom: 28px;
+        }
+        /* Role tabs */
+        
+        .role-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 26px;
+            gap: 4px;
+        }
+        
+        .role-tab {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.45);
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 9px;
+            transition: all .25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        
+        .role-tab.active {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(0, 48, 135, 0.45);
+        }
+        /* form elements */
+        
+        .fg {
+            margin-bottom: 16px;
+        }
+        
+        .fg label {
+            display: block;
+            color: rgba(255, 255, 255, 0.52);
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+        
+        .iw {
+            position: relative;
+        }
+        
+        .ii {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 15px;
+            pointer-events: none;
+        }
+        
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13.5px;
+            padding: 12px 14px 12px 42px;
+            outline: none;
+            transition: border-color .25s, box-shadow .25s, background .25s;
+            -webkit-appearance: none;
+        }
+        
+        select {
+            cursor: pointer;
+        }
+        
+        select option {
+            background: #000e35;
+            color: #fff;
+        }
+        
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        
+        input:focus,
+        select:focus {
+            border-color: var(--sky);
+            background: rgba(79, 142, 247, 0.08);
+            box-shadow: 0 0 0 3px rgba(79, 142, 247, 0.14);
+        }
+        
+        .eye-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.28);
+            font-size: 14px;
+            transition: color .2s;
+        }
+        
+        .eye-btn:hover {
+            color: var(--sky-soft);
+        }
+        
+        .row-between {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+            margin-top: 4px;
+        }
+        
+        .remember-lbl {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: rgba(255, 255, 255, 0.40);
+            font-size: 12.5px;
+            cursor: pointer;
+        }
+        
+        .remember-lbl input {
+            width: 14px;
+            height: 14px;
+            accent-color: var(--sky);
+        }
+        
+        .forgot-link {
+            color: var(--sky-soft);
+            font-size: 12.5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color .2s;
+        }
+        
+        .forgot-link:hover {
+            color: #fff;
+        }
+        
+        .btn-signin {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+            border: none;
+            border-radius: 11px;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14.5px;
+            font-weight: 700;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: transform .2s, box-shadow .2s;
+            box-shadow: 0 6px 26px rgba(0, 48, 135, 0.5);
+        }
+        
+        .btn-signin:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 34px rgba(0, 48, 135, 0.65);
+        }
+        
+        .btn-signin:active {
+            transform: translateY(0);
+        }
+        
+        .lp-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 18px 0;
+            color: rgba(255, 255, 255, 0.18);
+            font-size: 11px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+        
+        .lp-divider::before,
+        .lp-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .btn-sso {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 11px;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Outfit', sans-serif;
+            font-size: 13.5px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            transition: all .2s;
+        }
+        
+        .btn-sso:hover {
+            background: rgba(79, 142, 247, 0.1);
+            border-color: rgba(79, 142, 247, 0.3);
+            color: #fff;
+        }
+        /* ════════════════════════════════════════
+       ── DASHBOARD ──
+    ════════════════════════════════════════ */
+        
+        #dashboardPage {
+            display: none;
+            min-height: calc(100vh - 130px);
+        }
+        
+        .dash-layout {
+            display: grid;
+            grid-template-columns: var(--sidebar-w) 1fr;
+            min-height: calc(100vh - 130px);
+        }
+        /* Sidebar */
+        
+        .sidebar {
+            background: var(--navy-deeper);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sidebar-user {
+            padding: 28px 20px 22px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+        }
+        
+        .user-avatar {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--sky) 0%, var(--navy) 100%);
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            border: 3px solid rgba(79, 142, 247, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 48, 135, 0.4);
+        }
+        
+        .user-name {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .user-id {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 11.5px;
+        }
+        
+        .user-badge {
+            display: inline-block;
+            margin-top: 8px;
+            background: rgba(79, 142, 247, 0.18);
+            border: 1px solid rgba(79, 142, 247, 0.3);
+            color: var(--sky-soft);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 100px;
+        }
+        
+        .sidebar-nav {
+            flex: 1;
+            padding: 16px 12px;
+            overflow-y: auto;
+        }
+        
+        .nav-section-title {
+            color: rgba(255, 255, 255, 0.28);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 6px 10px 8px;
+            margin-top: 10px;
+        }
+        
+        .sb-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            color: rgba(255, 255, 255, 0.58);
+            font-size: 13.5px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all .2s;
+            border: none;
+            background: none;
+            width: 100%;
+            font-family: 'Outfit', sans-serif;
+            text-align: left;
+        }
+        
+        .sb-link .sb-ico {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .sb-link:hover {
+            background: rgba(255, 255, 255, 0.07);
+            color: #fff;
+        }
+        
+        .sb-link.active {
+            background: linear-gradient(135deg, rgba(0, 48, 135, 0.7), rgba(26, 86, 214, 0.5));
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(0, 48, 135, 0.3);
+        }
+        
+        .sb-link .badge-count {
+            margin-left: auto;
+            background: var(--gold);
+            color: #000;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 100px;
+        }
+        
+        .sidebar-foot {
+            padding: 16px 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .btn-logout {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 60, 60, 0.1);
+            border: 1px solid rgba(255, 60, 60, 0.2);
+            border-radius: 10px;
+            color: rgba(255, 120, 120, 0.85);
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all .2s;
+        }
+        
+        .btn-logout:hover {
+            background: rgba(255, 60, 60, 0.2);
+            border-color: rgba(255, 60, 60, 0.4);
+            color: #ff8080;
+        }
+        /* Dashboard Main */
+        
+        .dash-main {
+            background: var(--off-white);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        /* Top bar inside dash */
+        
+        .dash-topbar {
+            background: #fff;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        
+        .dash-topbar h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy-deeper);
+        }
+        
+        .dash-topbar span {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .topbar-notif {
+            position: relative;
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            font-size: 17px;
+            transition: background .2s;
+        }
+        
+        .topbar-notif:hover {
+            background: var(--border);
+        }
+        
+        .notif-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 16px;
+            height: 16px;
+            background: #e53e3e;
+            border-radius: 50%;
+            font-size: 9px;
+            color: #fff;
+            font-weight: 700;
+            display: grid;
+            place-items: center;
+            border: 2px solid #fff;
+        }
+        
+        .topbar-avatar {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--sky), var(--navy));
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 15px;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        /* Dashboard content */
+        
+        .dash-content {
+            padding: 28px 32px;
+            flex: 1;
+        }
+        /* Welcome banner */
+        
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--blue-accent) 100%);
+            border-radius: 18px;
+            padding: 28px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 32px rgba(0, 48, 135, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+        }
+        
+        .welcome-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            right: 120px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+        }
+        
+        .wb-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        
+        .wb-text p {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 13.5px;
+        }
+        
+        .wb-text .semester-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 100px;
+            margin-bottom: 12px;
+        }
+        
+        .wb-emoji {
+            font-size: 64px;
+            position: relative;
+            z-index: 1;
+        }
+        /* Stat cards */
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+        
+        .stat-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 20px 22px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: transform .2s, box-shadow .2s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        
+        .si-blue {
+            background: rgba(79, 142, 247, 0.12);
+        }
+        
+        .si-green {
+            background: rgba(72, 199, 142, 0.12);
+        }
+        
+        .si-gold {
+            background: rgba(245, 184, 0, 0.12);
+        }
+        
+        .si-red {
+            background: rgba(229, 62, 62, 0.12);
+        }
+        
+        .stat-info .stat-num {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--navy-deeper);
+            line-height: 1;
+        }
+        
+        .stat-info .stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-top: 3px;
+        }
+        /* Main grid */
+        
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 20px;
+        }
+        
+        .section-card {
+            background: #fff;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .sc-head {
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .sc-head h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--navy-deeper);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .sc-head a {
+            font-size: 12.5px;
+            color: var(--sky);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .sc-body {
+            padding: 16px 22px;
+        }
+        /* Timetable */
+        
+        .tt-row {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 14px;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f4fb;
+        }
+        
+        .tt-row:last-child {
+            border-bottom: none;
+        }
+        
+        .tt-time {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+        
+        .tt-subject {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--navy-deeper);
+        }
+        
+        .tt-room {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        
+        .tt-badge {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 100px;
+        }
+        
+        .tb-online {
+            background: rgba(72, 199, 142, 0.12);
+            color: #276749;
+        }
+        
+        .tb-hall {
+            background: rgba(79, 142, 247, 0.12);
+            color: var(--navy);
+        }
+        
+        .tb-lab {
+            background: rgba(245, 184, 0, 0.12);
+            color: #7a5500;
+        }
+        /* Announcements */
+        
+        .ann-item {
+            display: flex;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f4fb;
+        }
+        
+        .ann-item:last-child {
+            border-bottom: none;
+        }
+        
+        .ann-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+        
+        .ann-title {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 4px;
+        }
+        
+        .ann-meta {
+            font-size: 11.5px;
+            color: var(--text-muted);
+        }
+        /* Results */
+        
+        .result-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f4fb;
+        }
+        
+        .result-row:last-child {
+            border-bottom: none;
+        }
+        
+        .res-module {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a202c;
+        }
+        
+        .res-code {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        
+        .res-grade {
+            font-size: 15px;
+            font-weight: 800;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+        }
+        
+        .grade-a {
+            background: rgba(72, 199, 142, 0.12);
+            color: #276749;
+        }
+        
+        .grade-b {
+            background: rgba(79, 142, 247, 0.12);
+            color: var(--navy);
+        }
+        
+        .grade-c {
+            background: rgba(245, 184, 0, 0.12);
+            color: #7a5500;
+        }
+        /* Quick links */
+        
+        .quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 16px 22px;
+        }
+        
+        .ql-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--navy-deeper);
+            cursor: pointer;
+            text-align: center;
+            transition: all .2s;
+            text-decoration: none;
+        }
+        
+        .ql-item:hover {
+            background: var(--navy);
+            color: #fff;
+            border-color: var(--navy);
+        }
+        
+        .ql-item .qi {
+            font-size: 24px;
+        }
+        /* calendar mini */
+        
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            padding: 12px 22px;
+        }
+        
+        .cal-day {
+            text-align: center;
+            font-size: 11.5px;
+        }
+        
+        .cal-hdr {
+            font-weight: 700;
+            color: var(--text-muted);
+            padding: 4px 0;
+        }
+        
+        .cal-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto;
+            font-size: 12px;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+            transition: all .15s;
+        }
+        
+        .cal-num:hover {
+            background: var(--off-white);
+        }
+        
+        .cal-today {
+            background: var(--navy) !important;
+            color: #fff !important;
+            font-weight: 700;
+        }
+        
+        .cal-event {
+            background: rgba(79, 142, 247, 0.12);
+            color: var(--navy);
+            font-weight: 600;
+        }
+        
+        .cal-other {
+            color: #ccc;
+        }
+        /* footer */
+        
+        .dash-footer {
+            background: var(--navy-deeper);
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 12px;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        /* ════════════════════════════
+       ANIMATIONS
+    ════════════════════════════ */
+        
+        @keyframes fadeUp {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(28px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        /* --- Shared Card Styles --- */
         
-        .card {
-            background: var(--card-bg);
-            border-radius: 22px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
+        @keyframes slideInR {
+            from {
+                opacity: 0;
+                transform: translateX(28px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
         
-        h2 {
-            font-size: 22px;
-            margin-bottom: 20px;
-            font-weight: 800;
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: .4;
+                transform: scale(.65);
+            }
         }
         
-        .live-tag {
-            font-size: 10px;
-            color: var(--success);
-            background: rgba(34, 197, 94, 0.1);
-            padding: 3px 8px;
-            border-radius: 6px;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-        /* --- Home Page Specifics --- */
-        
-        .notice {
-            background: rgba(239, 68, 68, 0.08);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            padding: 14px;
-            border-radius: 15px;
-            font-size: 13px;
-            color: #ff7b7b;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 10px;
+        @keyframes dashIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .overview-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        
-        .progress-bg {
-            height: 6px;
-            background: #233554;
-            border-radius: 3px;
-            margin: 15px 0 8px 0;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            border-radius: 3px;
-            background: var(--accent);
-        }
-        
-        .status-pill {
-            float: right;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: bold;
-        }
-        /* --- Transit Page Specifics --- */
-        
-        .transit-list {
-            background: var(--transit-blue);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        
-        .transit-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 18px 20px;
-            border-bottom: 1px solid #005EB8;
-        }
-        
-        .time-tag {
-            color: var(--accent);
-            font-weight: bold;
-        }
-        /* --- Clubs Page Specifics --- */
-        
-        .club-card {
-            text-align: center;
-        }
-        
-        .club-icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-        
-        .btn-club {
-            width: 100%;
-            padding: 10px;
-            border-radius: 12px;
-            margin-top: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            border: 1px solid var(--accent);
-        }
-        
-        .btn-joined {
-            background: var(--accent);
-            color: #000;
-        }
-        
-        .top- {
-            color: var(--bg-dark);
-            box-shadow: #070d19 0px 10px 15px -3px, #0b2965 0px 4px 6px -2px;
-            padding: 30px;
-            margin-bottom: 14px;
-            border-radius: 16px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .btn-join {
-            background: transparent;
-            color: var(--accent);
+        .dash-layout {
+            animation: dashIn 0.5s ease both;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="app-container">
-        <header class="top-">
-            <h4 id="live" class="welcome-text"></h4>
-            <h1 class="user-name">Welcome to CINEC<br><span class="gold-text">Student</span></h1>
-
-            <div class="points-card">
-                <div>
-                    <small style="color: var(--text-dim); font-size: 10px; letter-spacing: 0.5px;">ENGAGEMENT POINTS</small>
-                    <div style="font-size: 28px; font-weight: 900; color: var(--accent); margin-top: 5px;">0 <span style="font-size: 14px; color: var(--text-dim); font-weight: 400;">/ 500 for Level 3</span></div>
-                </div>
-                <button class="check-in-btn"><a href = "Check.html" style="text-decoration: none; color: gray;">Check In</a></button>
-            </div>
-        </header>
-        <div class="nav-grid">
-            <div class="nav-item active" onclick="nav('home', this)"><span>🏠</span>HOME</div>
-            <div class="nav-item" onclick="nav('campus', this)"><span>🏛️</span>CAMPUS</div>
-            <div class="nav-item" onclick="nav('transit', this)"><span>🚌</span>TRANSIT</div>
-            <div class="nav-item" onclick="nav('clubs', this)"><span>🎓</span>CLUBS</div>
-            <div class="nav-item" onclick="nav('rewards', this)"><span>🏆</span>REWARDS</div>
-        </div>
-
-        <div id="home" class="page-content active">
-            <div class="notice">
-                <span>⚠️</span> Notice: Library closes at 8 PM today due to faculty event.
-            </div>
-            <h2>Today's Overview <span class="live-tag">LIVE</span></h2>
-            <div class="overview-grid">
-                <div id="openes" class="card">
-                    <div style="font-size: 24px;">💪</div>
-                    <small style="color: var(--text-dim); font-weight: bold; font-size: 10px;">FITNESS CENTER</small>
-                    <div id="open" style="color: var(--success); font-weight: bold; margin-top: 5px;"></div>
-                </div>
-                <div class="card">
-                    <div style="font-size: 24px;">🚌</div>
-                    <small style="color: var(--text-dim); font-weight: bold; font-size: 10px;">NEXT BUS</small>
-                    <div style="font-weight: bold; margin-top: 5px;">12 mins</div>
-                </div>
-                <div class="card">
-                    <div style="font-size: 24px;">📚</div>
-                    <small style="color: var(--text-dim); font-weight: bold; font-size: 10px;">LIBRARY</small>
-                    <div style="color: var(--accent); font-weight: bold; margin-top: 5px;">Moderate</div>
-                </div>
-                <div class="card">
-                    <div style="font-size: 24px;">🎉</div>
-                    <small style="color: var(--text-dim); font-weight: bold; font-size: 10px;">EVENTS TODAY</small><br>
-                    <a href="Events.html" style="font-weight: bold; text-decoration: none; color: var(--accent)" margin-top: 5px; ">Events</a>
-                </div>
-                <div class="card ">
-                    <div style="font-size: 24px; ">🗺️</div>
-                    <small style="color: var(--text-dim); font-weight: bold; font-size: 10px; ">MAP OF CINEC</small><br>
-                    <a href="Map.html " style="font-weight: bold; text-decoration: none; color: var(--accent) " margin-top: 5px;">MAP</a>
-                </div>
-            </div>
-        </div>
-
-        <div id="campus" class="page-content">
-            <h2>Campus Facilities <span class="live-tag" style="color: #4ade80">UPDATED</span></h2>
-
-            <div class="card">
-                <span class="status-pill" style="background: rgba(34, 197, 94, 0.1); color: var(--success);">Open</span>
-                <h3 style="margin: 0; font-size: 17px;">CINEC Fitness Center</h3>
-                <p style="color: var(--text-dim); font-size: 12px; margin: 5px 0;">Ground Floor, Sports Complex</p>
-                <div class="progress-bg">
-                    <div class="progress-fill" style="width: 42%;"></div>
-                </div>
-                <small style="color: var(--text-dim)">Occupancy: 42% · Plenty of space</small>
-            </div>
-
-            <div class="card">
-                <span class="status-pill" style="background: rgba(243, 176, 50, 0.1); color: var(--accent);">Moderate</span>
-                <h3 style="margin: 0; font-size: 17px;">Main Library</h3>
-                <p style="color: var(--text-dim); font-size: 12px; margin: 5px 0;">Academic Block, Level 2</p>
-                <div class="progress-bg">
-                    <div class="progress-fill" style="width: 65%;"></div>
-                </div>
-                <small style="color: var(--text-dim)">Occupancy: 65% · Moderately busy</small>
-            </div>
-        </div>
-
-        <div id="transit" class="page-content">
-            <h2>Campus Transit <span class="live-tag">LIVE</span></h2>
-            <div class="transit-list">
-                <div style="padding: 15px 20px; font-size: 11px; color: var(--text-dim); font-weight: bold;">NEXT DEPARTURES FROM CINEC GATE</div>
-                <div class="transit-item">
-                    <span>🚌 Route 103 → Colombo Fort</span>
-                    <span class="time-tag">3 min</span>
-                </div>
-                <div class="transit-item">
-                    <span>🚌 Route 240 → Ratmalana</span>
-                    <span class="time-tag" style="color: var(--success)">15 min</span>
-                </div>
-                <div class="transit-item">
-                    <span>🚌 Route 103 → Colombo Fort</span>
-                    <span class="time-tag" style="color: var(--success)">26 min</span>
-                </div>
-            </div>
-        </div>
-
-        <div id="clubs" class="page-content">
-            <h2>Campus Clubs</h2>
-            <div id="code" class="overview-grid">
-                <div class="card club-card">
-                    <div class="club-icon">💻</div>
-                    <h4 style="margin: 0;">Coding Club</h4>
-                    <small style="color: var(--text-dim)">142 members</small>
-                    <button onclick="toggleJoin(this)" class="btn-club btn-join">+ Join</button>
-                </div>
-                <div id="cyber-security" class="card club-card">
-                    <div class="club-icon">🔐</div>
-                    <h4 style="margin: 0;">Cyber Security</h4>
-                    <small style="color: var(--text-dim)">78 members</small>
-                    <button onclick="toggleJoin(this)" class="btn-club btn-join">+ Join</button>
-                </div>
-                <div id="games-society" class="card club-card">
-                    <div class="club-icon">🎮</div>
-                    <h4 style="margin: 0;">Games Society</h4>
-                    <small style="color: var(--text-dim)">203 members</small>
-                    <button onclick="toggleJoin(this)" class="btn-club btn-join">+ Join</button>
-                </div>
-                <div id="ieee-branch" class="card club-card">
-                    <div class="club-icon">⚡</div>
-                    <h4 style="margin: 0;">IEEE Branch</h4>
-                    <small style="color: var(--text-dim)">95 members</small>
-                    <button onclick="toggleJoin(this)" class="btn-club btn-join">+ Join</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="rewards" class="page-content">
-            <h2>Rewards</h2>
-            <div class="card " style="text-align: center; border: 2px dashed var(--accent); ">
-                <div style="font-size: 40px; margin-bottom: 10px; ">🎁</div>
-                <p>New rewards unlocking at <b>Level 3</b></p>
-                <small style="color: var(--text-dim) ">Keep engaging to earn more points!</small>
-            </div>
-        </div>
-
+    <!-- ══════════════════════════════════════════════
+     UTILITY TOP BAR
+══════════════════════════════════════════════ -->
+    <div class="util-bar">
+        <a href="#">Quality Assurance</a><span class="sep">|</span>
+        <a href="#">LMS</a><span class="sep">|</span>
+        <a href="#">Staff</a><span class="sep">|</span>
+        <a href="#">Certificate Verification</a><span class="sep">|</span>
+        <a href="#">Careers at CINEC</a><span class="sep">|</span>
+        <a href="#">Contact Us</a><span class="sep">|</span>
+        <a href="#">Urgent Contact</a><span class="sep">|</span>
+        <a href="#">FAQ</a>
     </div>
 
+    <!-- ══════════════════════════════════════════════
+     LOGO HEADER
+══════════════════════════════════════════════ -->
+    <div class="logo-header">
+        <div class="logo-wrap">
+            <div class="logo-img-box">
+                <img src="logo.WEBP" alt="CINEC Campus Logo" />
+            </div>
+            <div class="logo-text-block">
+
+
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-search">
+                <input type="text" placeholder="Search courses, departments…" />
+                <button>🔍</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+     MAIN NAVIGATION BAR
+══════════════════════════════════════════════ -->
+    <nav class="main-nav">
+        <div class="nav-item">
+            <button class="nav-link gold-active" onclick="showPage('login')">HOME</button>
+        </div>
+        <div class="nav-item">
+            <button class="nav-link">ABOUT CINEC <span class="caret">▼</span></button>
+            <div class="dropdown">
+                <a href="#">History & Vision</a>
+                <a href="#">Chancellor's Message</a>
+                <a href="#">Accreditation</a>
+                <a href="#">Awards & Recognition</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-link">COURSES <span class="caret">▼</span></button>
+            <div class="dropdown">
+                <a href="#">Maritime Studies</a>
+                <a href="#">Engineering</a>
+                <a href="#">Computing</a>
+                <a href="#">Management</a>
+                <a href="#">Health Sciences</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-link">ACADEMIC <span class="caret">▼</span></button>
+            <div class="dropdown">
+                <a href="#">Academic Calendar</a>
+                <a href="#">Examinations</a>
+                <a href="#">Library</a>
+                <a href="#">E-Learning</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-link">BRANCHES <span class="caret">▼</span></button>
+            <div class="dropdown">
+                <a href="#">Malabe Campus</a>
+                <a href="#">Kurunegala</a>
+                <a href="#">Galle</a>
+                <a href="#">Jaffna</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-link">PROJECTS</button>
+        </div>
+        <div class="nav-item">
+            <button class="nav-link">ADMISSION <span class="caret">▼</span></button>
+            <div class="dropdown">
+                <a href="#">Apply Online</a>
+                <a href="#">Scholarships</a>
+                <a href="#">Entry Requirements</a>
+                <a href="#">International Students</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-link">RESEARCH</button>
+        </div>
+        <div class="nav-item">
+            <button class="nav-link">CAMPUS LIFE <span class="caret">▼</span></button>
+            <div class="dropdown">
+                <a href="#">Student Clubs</a>
+                <a href="#">Sports</a>
+                <a href="#">Events</a>
+                <a href="#">Welfare</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ══════════════════════════════════════════════
+     LOGIN PAGE
+══════════════════════════════════════════════ -->
+    <div id="loginPage">
+        <div class="login-bg"></div>
+        <div class="login-inner">
+
+            <!-- Hero -->
+            <div class="login-hero">
+                <div></div>
+                <!-- spacer -->
+                <div>
+                    <div class="lh-tag"><span class="lh-dot"></span>Student &amp; Staff Portal · 2024/25</div>
+                    <h1>Your gateway to<br /><em>campus excellence.</em></h1>
+                    <p>One secure login for timetables, results, library access, club events, fee payments, and all campus services.</p>
+                    <div class="lh-features">
+                        <div class="lh-feat">
+                            <span class="fi">📅</span>
+                            <div><strong>Live Timetables</strong><span>Real-time lecture and exam schedules</span></div>
+                        </div>
+                        <div class="lh-feat">
+                            <span class="fi">📊</span>
+                            <div><strong>Results & GPA</strong><span>Grades, transcripts and academic progress</span></div>
+                        </div>
+                        <div class="lh-feat">
+                            <span class="fi">📚</span>
+                            <div><strong>Library & e-Resources</strong><span>Access thousands of journals and books</span></div>
+                        </div>
+                        <div class="lh-feat">
+                            <span class="fi">💳</span>
+                            <div><strong>Fee Management</strong><span>Pay fees and view payment history</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lh-foot">© 2025 CINEC Campus · Malabe, Sri Lanka · All Rights Reserved</div>
+            </div>
+
+            <!-- Login Panel -->
+            <div class="login-panel">
+                <div class="lp-badge">🎓 Secure Portal Login</div>
+                <h2>Welcome to CINEC</h2>
+                <p class="lp-sub">Sign in to access your personalised dashboard.</p>
+
+                <!-- Role Tabs -->
+                <div class="role-tabs">
+                    <button class="role-tab active" id="tabStudent" onclick="switchTab('student')">🎓 Student</button>
+                    <button class="role-tab" id="tabStaff" onclick="switchTab('staff')">👔 Staff / Faculty</button>
+                </div>
+
+                <!-- Student Form -->
+                <div id="studentForm">
+                    <div class="fg">
+                        <label>Student ID</label>
+                        <div class="iw"><span class="ii">🆔</span>
+                            <input type="text" id="s-id" placeholder="e.g. CINEC/2022/CS/001" />
+                        </div>
+                    </div>
+                    <div class="fg">
+                        <label>Faculty</label>
+                        <div class="iw"><span class="ii">🏛️</span>
+                            <select id="s-fac">
+              <option value="">Select your faculty</option>
+              <option>Faculty of Maritime Studies</option>
+              <option>Faculty of Engineering</option>
+              <option>Faculty of Computing</option>
+              <option>Faculty of Management</option>
+              <option>Faculty of Humanities</option>
+              <option>Faculty of Health Sciences</option>
+            </select>
+                        </div>
+                    </div>
+                    <div class="fg">
+                        <label>Password</label>
+                        <div class="iw"><span class="ii">🔒</span>
+                            <input type="password" id="s-pw" placeholder="Enter your password" />
+                            <button class="eye-btn" type="button" onclick="togglePw('s-pw',this)">👁️</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Staff Form -->
+                <div id="staffForm" style="display:none;">
+                    <div class="fg">
+                        <label>Institutional Email</label>
+                        <div class="iw"><span class="ii">✉️</span>
+                            <input type="email" id="st-email" placeholder="name@cinec.edu.lk" />
+                        </div>
+                    </div>
+                    <div class="fg">
+                        <label>Department</label>
+                        <div class="iw"><span class="ii">🏢</span>
+                            <select id="st-dept">
+              <option value="">Select department</option>
+              <option>Academic Staff</option>
+              <option>Registry & Admissions</option>
+              <option>IT Department</option>
+              <option>Finance Department</option>
+              <option>Library Services</option>
+              <option>Human Resources</option>
+            </select>
+                        </div>
+                    </div>
+                    <div class="fg">
+                        <label>Password</label>
+                        <div class="iw"><span class="ii">🔒</span>
+                            <input type="password" id="st-pw" placeholder="Enter your password" />
+                            <button class="eye-btn" type="button" onclick="togglePw('st-pw',this)">👁️</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-between">
+                    <label class="remember-lbl"><input type="checkbox" /> Keep me signed in</label>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button class="btn-signin" id="signinBtn" onclick="doLogin()">Sign In to Portal</button>
+
+                <div class="lp-divider">or</div>
+                <button class="btn-sso">🏛️&nbsp; Continue with CINEC SSO</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+     DASHBOARD PAGE
+══════════════════════════════════════════════ -->
+    <div id="dashboardPage">
+        <div class="dash-layout">
+
+            <!-- ── SIDEBAR ── -->
+            <aside class="sidebar">
+                <div class="sidebar-user">
+                    <div class="user-avatar" id="avatarLetter">A</div>
+                    <div class="user-name" id="dashName">Ashan Perera</div>
+                    <div class="user-id" id="dashId">CINEC/2022/CS/047</div>
+                    <div class="user-badge" id="dashRole">Student · Computing</div>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <div class="nav-section-title">Main</div>
+                    <button class="sb-link active" onclick="setActive(this)">
+          <span class="sb-ico">🏠</span> Dashboard
+        </button>
+                    <button class="sb-link" onclick="setActive(this)">
+          <span class="sb-ico">📅</span> My Timetable
+        </button>
+                    <button class="sb-link" onclick="setActive(this)">
+          <span class="sb-ico">📊</span> Results & GPA
+        </button>
+                    <button class="sb-link" onclick="setActive(this)">
+          <span class="sb-ico">📝</span> Assignments
+          <span class="badge-count">3</span>
+        </button>
+                    <button class="sb-link" onclick="setActive(this)">
+          <span class="sb-ico">📢</span> Announcements
+          <span class="badge-count">5</span>
+        </button>
+
+                    <div class="nav-section-title">Academic</div>
+                    <button class="sb-link" onclick="setActive(this)">
+          <span class="sb-ico">📚</span> Library
+        </button>
+                    <button class="sb-link" onclick="setActive(this)">
+          <span class="sb-ico">💻</span> E-Learning (LMS)
+        </button>
+                    <button class="sb-link" onclick="setActive(this)">
+          <span class="sb-ico">🎓</span> Examination Portal
+        </button>
+                    <button class="sb-link" onclick="setActive(this)">
+          <span class="sb-ico">📄</span> Transcripts
+        </button>
+
+                    <div class="nav-section-title">Campus</div>
+                    <button class="sb-link" onclick="setActive(this)">
+          <span class="sb-ico">💳</span> Fee Payment
+        </button>
+                    <button class="sb-link" onclick="setActive(this)">
+          <span class="sb-ico">🏆</span> Campus Clubs
+        </button>
+                    <button class="sb-link" onclick="setActive(this)">
+          <span class="sb-ico">🚌</span> Transport
+        </button>
+                    <button class="sb-link" onclick="setActive(this)">
+          <span class="sb-ico">⚙️</span> Settings
+        </button>
+                </nav>
+
+                <div class="sidebar-foot">
+                    <button class="btn-logout" onclick="doLogout()">🚪 Sign Out</button>
+                </div>
+            </aside>
+
+            <!-- ── MAIN CONTENT ── -->
+            <div class="dash-main">
+                <!-- Topbar -->
+                <div class="dash-topbar">
+                    <div>
+                        <h2>Student Dashboard</h2>
+                        <span id="dashDate">Monday, 23 February 2025</span>
+                    </div>
+                    <div class="topbar-right">
+                        <div class="topbar-notif">
+                            🔔
+                            <div class="notif-badge">5</div>
+                        </div>
+                        <div class="topbar-avatar" id="topAvatar">A</div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="dash-content">
+
+                    <!-- Welcome banner -->
+                    <div class="welcome-banner">
+                        <div class="wb-text">
+                            <div class="semester-tag">📅 Semester II · 2024/25</div>
+                            <h2>Good morning, <span id="wbName">Ashan</span>! 👋</h2>
+                            <p>You have <strong style="color:#fff;">3 assignments</strong> due this week and <strong style="color:#fff;">5 new announcements</strong> from your faculty.</p>
+                        </div>
+                        <div class="wb-emoji">🎓</div>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="stat-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon si-blue">📅</div>
+                            <div class="stat-info">
+                                <div class="stat-num">4</div>
+                                <div class="stat-label">Classes Today</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon si-green">✅</div>
+                            <div class="stat-info">
+                                <div class="stat-num">87%</div>
+                                <div class="stat-label">Attendance</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon si-gold">⭐</div>
+                            <div class="stat-info">
+                                <div class="stat-num">3.72</div>
+                                <div class="stat-label">Current GPA</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon si-red">💳</div>
+                            <div class="stat-info">
+                                <div class="stat-num">Paid</div>
+                                <div class="stat-label">Semester Fees</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main two-col grid -->
+                    <div class="main-grid">
+                        <div>
+                            <!-- Timetable -->
+                            <div class="section-card">
+                                <div class="sc-head">
+                                    <h3>📅 Today's Timetable</h3>
+                                    <a href="#">Full Schedule →</a>
+                                </div>
+                                <div class="sc-body">
+                                    <div class="tt-row">
+                                        <div class="tt-time">08:00 AM</div>
+                                        <div>
+                                            <div class="tt-subject">Database Management Systems</div>
+                                            <div class="tt-room">📍 Lecture Hall A · Dr. S. Fernando</div>
+                                        </div>
+                                        <span class="tt-badge tb-hall">Hall</span>
+                                    </div>
+                                    <div class="tt-row">
+                                        <div class="tt-time">10:00 AM</div>
+                                        <div>
+                                            <div class="tt-subject">Web Application Development</div>
+                                            <div class="tt-room">📍 Computer Lab 3 · Mr. R. Silva</div>
+                                        </div>
+                                        <span class="tt-badge tb-lab">Lab</span>
+                                    </div>
+                                    <div class="tt-row">
+                                        <div class="tt-time">01:00 PM</div>
+                                        <div>
+                                            <div class="tt-subject">Software Engineering</div>
+                                            <div class="tt-room">📍 Online · Ms. D. Perera</div>
+                                        </div>
+                                        <span class="tt-badge tb-online">Online</span>
+                                    </div>
+                                    <div class="tt-row">
+                                        <div class="tt-time">03:00 PM</div>
+                                        <div>
+                                            <div class="tt-subject">Computer Networks</div>
+                                            <div class="tt-room">📍 Lecture Hall B · Mr. K. Jayawardena</div>
+                                        </div>
+                                        <span class="tt-badge tb-hall">Hall</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Results -->
+                            <div class="section-card">
+                                <div class="sc-head">
+                                    <h3>📊 Recent Results</h3>
+                                    <a href="#">View All →</a>
+                                </div>
+                                <div class="sc-body">
+                                    <div class="result-row">
+                                        <div>
+                                            <div class="res-module">Database Management Systems</div>
+                                            <div class="res-code">CS3012 · Semester I</div>
+                                        </div>
+                                        <div class="res-grade grade-a">A</div>
+                                    </div>
+                                    <div class="result-row">
+                                        <div>
+                                            <div class="res-module">Object-Oriented Programming</div>
+                                            <div class="res-code">CS2008 · Semester I</div>
+                                        </div>
+                                        <div class="res-grade grade-a">A+</div>
+                                    </div>
+                                    <div class="result-row">
+                                        <div>
+                                            <div class="res-module">Computer Networks</div>
+                                            <div class="res-code">CS2014 · Semester I</div>
+                                        </div>
+                                        <div class="res-grade grade-b">B+</div>
+                                    </div>
+                                    <div class="result-row">
+                                        <div>
+                                            <div class="res-module">Mathematics for Computing</div>
+                                            <div class="res-code">CS1005 · Semester I</div>
+                                        </div>
+                                        <div class="res-grade grade-b">B</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right column -->
+                        <div>
+                            <!-- Quick links -->
+                            <div class="section-card" style="margin-bottom:20px;">
+                                <div class="sc-head">
+                                    <h3>⚡ Quick Access</h3>
+                                </div>
+                                <div class="quick-grid">
+                                    <a class="ql-item" href="#">
+                                        <div class="qi">📝</div>Assignments</a>
+                                    <a class="ql-item" href="#">
+                                        <div class="qi">📄</div>Transcript</a>
+                                    <a class="ql-item" href="#">
+                                        <div class="qi">💳</div>Fee Portal</a>
+                                    <a class="ql-item" href="#">
+                                        <div class="qi">📚</div>Library</a>
+                                    <a class="ql-item" href="#">
+                                        <div class="qi">📢</div>Notices</a>
+                                    <a class="ql-item" href="#">
+                                        <div class="qi">🎓</div>Exams</a>
+                                </div>
+                            </div>
+
+                            <!-- Announcements -->
+                            <div class="section-card">
+                                <div class="sc-head">
+                                    <h3>📢 Announcements</h3>
+                                    <a href="#">All →</a>
+                                </div>
+                                <div class="sc-body">
+                                    <div class="ann-item">
+                                        <div class="ann-dot" style="background:#e53e3e;"></div>
+                                        <div>
+                                            <div class="ann-title">Semester II Examination Timetable Released</div>
+                                            <div class="ann-meta">Faculty of Computing · 2 hours ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="ann-item">
+                                        <div class="ann-dot" style="background:#4f8ef7;"></div>
+                                        <div>
+                                            <div class="ann-title">Web Dev Assignment 3 — Deadline Extended</div>
+                                            <div class="ann-meta">Mr. R. Silva · Today, 09:15 AM</div>
+                                        </div>
+                                    </div>
+                                    <div class="ann-item">
+                                        <div class="ann-dot" style="background:#f5b800;"></div>
+                                        <div>
+                                            <div class="ann-title">Coding Club Meeting — Wednesday 4 PM</div>
+                                            <div class="ann-meta">Campus Life · Yesterday</div>
+                                        </div>
+                                    </div>
+                                    <div class="ann-item">
+                                        <div class="ann-dot" style="background:#48c78e;"></div>
+                                        <div>
+                                            <div class="ann-title">Library Extended Hours During Exam Season</div>
+                                            <div class="ann-meta">Library Services · 2 days ago</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /main-grid -->
+                </div>
+                <!-- /dash-content -->
+
+                <!-- Footer -->
+                <div class="dash-footer">
+                    <span>© 2025 CINEC Campus · Student Information System v3.2</span>
+                    <span>Malabe, Sri Lanka · <a href="/cdn-cgi/l/email-protection" class="_cf_email_" data-cfemail="a0d3d5d0d0cfd2d4e0c3c9cec5c38ec5c4d58ecccb">[email&#160;protected]</a></span>
+                </div>
+            </div>
+            <!-- /dash-main -->
+        </div>
+        <!-- /dash-layout -->
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
-        const hour = new Date().getHours();
-        let greeting;
-        let studentnew = "student";
-
-        if (hour < 16) {
-            greeting = "Good day" + " , " + studentnew;
-        } else {
-            greeting = "Good evening" + " , " + studentnew;
+        /* ── Tab switch ── */
+        function switchTab(role) {
+            const isStu = role === 'student';
+            document.getElementById('studentForm').style.display = isStu ? '' : 'none';
+            document.getElementById('staffForm').style.display = isStu ? 'none' : '';
+            document.getElementById('tabStudent').classList.toggle('active', isStu);
+            document.getElementById('tabStaff').classList.toggle('active', !isStu);
         }
 
-        document.getElementById("live").innerHTML = greeting;
-
-        const hourgym = new Date().getHours();
-        let available;
-        let student = "student";
-
-        if (hourgym < 16) {
-            available = "Open";
-        } else {
-            available = "Closed";
+        /* ── Password toggle ── */
+        function togglePw(id, btn) {
+            const el = document.getElementById(id);
+            el.type = el.type === 'password' ? 'text' : 'password';
+            btn.textContent = el.type === 'password' ? '👁️' : '🙈';
         }
 
-        document.getElementById("open").innerHTML = available;
+        /* ── Login ── */
+        function doLogin() {
+            const btn = document.getElementById('signinBtn');
+            const isStu = document.getElementById('tabStudent').classList.contains('active');
+            const nameVal = isStu ?
+                (document.getElementById('s-id').value || 'Ashan Perera') :
+                (document.getElementById('st-email').value.split('@')[0] || 'Staff Member');
 
-        function nav(pageId, element) {
-            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            btn.textContent = 'Authenticating…';
+            btn.style.opacity = '0.75';
 
-            document.getElementById(pageId).classList.add('active');
-            element.classList.add('active');
+            setTimeout(() => {
+                btn.textContent = '✓ Welcome! Loading dashboard…';
+                btn.style.background = 'linear-gradient(135deg,#4ade80,#16a34a)';
+                btn.style.opacity = '1';
 
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+                setTimeout(() => {
+                    /* populate dashboard */
+                    const firstName = isStu ? 'Ashan' : nameVal.split('.')[0];
+                    const displayName = isStu ? 'Ashan Perera' : nameVal;
+                    const initial = displayName.charAt(0).toUpperCase();
+                    const role = isStu ? 'Student · Computing' : 'Staff · Faculty';
+                    const idText = isStu ?
+                        (document.getElementById('s-id').value || 'CINEC/2022/CS/047') :
+                        (document.getElementById('st-email').value || 'staff@cinec.edu.lk');
+
+                    document.getElementById('dashName').textContent = displayName;
+                    document.getElementById('dashId').textContent = idText;
+                    document.getElementById('dashRole').textContent = role;
+                    document.getElementById('avatarLetter').textContent = initial;
+                    document.getElementById('topAvatar').textContent = initial;
+                    document.getElementById('wbName').textContent = firstName;
+
+                    /* set date */
+                    document.getElementById('dashDate').textContent =
+                        new Date().toLocaleDateString('en-GB', {
+                            weekday: 'long',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        });
+
+                    showPage('dashboard');
+                    btn.textContent = 'Sign In to Portal';
+                    btn.style.background = '';
+                    btn.style.opacity = '1';
+                }, 1000);
+            }, 1400);
         }
 
-        function toggleJoin(button) {
-
-            if (button.classList.contains("btn-join")) {
-                button.innerHTML = "✓ Joined";
-                button.classList.remove("btn-join");
-                button.classList.add("btn-joined");
-            } else {
-
-                let confirmLeave = confirm("Are you sure you want to leave this club?");
-                if (confirmLeave == true) {
-
-                    button.innerHTML = "+ Join";
-                    button.classList.remove("btn-joined");
-                    button.classList.add("btn-join");
-                }
-            }
-
+        /* ── Logout ── */
+        function doLogout() {
+            showPage('login');
         }
-        /*document.querySelectorAll('#clubs .btn-join').forEach(button => {
-            button.addEventListener('click', function() {
-                this.textContent = "✓ Joined ";
-                this.classList.remove('btn-join');
-                this.classList.add('btn-joined');
-            });
-        });*/
-    </script>
 
-
-</body>
-
-</html>
+        /* ── Page switch ── */
+        function showPage(page) {
+            document.getElementById('loginPage').style.display = page === 'login' ? '' : 'none';
+            document.getElementById('dashboardPage').style.display = page === 'dashboard' ?
