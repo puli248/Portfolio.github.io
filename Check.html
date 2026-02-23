@@ -33,33 +33,54 @@
   </div>
 <script>
 function checkIn() {
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let faculty = document.getElementById("faculty").value;
-    let studentid = document.getElementById("studentid").value;
-    let batch = document.getElementById("batch").value;
-    
+
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let faculty = document.getElementById("faculty").value.trim();
+    let studentid = document.getElementById("studentid").value.trim();
+    let batch = document.getElementById("batch").value.trim();
 
     if (name === "" || email === "" || faculty === "" || studentid === "" || batch === "") {
         alert("Please fill all fields!");
         return;
     }
 
+    // Success message
     document.getElementById("message").innerText = "Successfully Checked In! 🎉";
 
-    let list = document.getElementById("checkInList")
-        
-    list.addEventListener("click", function (){
-        alert(✔ " + name + " (" + email + " | " + faculty + " | " + studentid + " | " + batch + ")
-    });
+    let list = document.getElementById("checkInList");
+
+    // Create new check-in item
+    let newItem = document.createElement("div");
+    newItem.style.padding = "10px";
+    newItem.style.marginTop = "8px";
+    newItem.style.backgroundColor = "#f0f8ff";
+    newItem.style.borderRadius = "5px";
+    newItem.style.display = "flex";
+    newItem.style.justifyContent = "space-between";
+    newItem.style.alignItems = "center";
+
+    newItem.innerHTML = `
+        <span>✔ ${name} (${email} | ${faculty} | ${studentid} | ${batch})</span>
+        <button onclick="removeCheckIn(this)" style="background:red;color:white;border:none;padding:5px 8px;border-radius:4px;cursor:pointer;">X</button>
+    `;
+
+    list.appendChild(newItem);
+
+    // Clear inputs
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
     document.getElementById("faculty").value = "";
     document.getElementById("studentid").value = "";
     document.getElementById("batch").value = "";
 }
-</script>
 
+
+// Remove function
+function removeCheckIn(button) {
+    button.parentElement.remove();
+}
+</script>
 </body>
 
 </html>
