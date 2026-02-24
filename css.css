@@ -170,13 +170,13 @@ h2 {
     gap: 10px;
 }
 
-.overview-grid {
+/*.overview-grid {
     margin-top: 50px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     padding: 80px;
-}
+}*/
 
 
 /* --- Campus Page Specifics --- */
