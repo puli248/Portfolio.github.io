@@ -498,34 +498,43 @@
         btn.textContent = inp.type === 'password' ? '👁' : '🙈';
     }
 
-    function doLogin() {
-        const u = document.getElementById('usernameInput');
-        const p = document.getElementById('passwordInput');
-        const eu = document.getElementById('err-user');
-        const ep = document.getElementById('err-pass');
-        let valid = true;
+   <script>
+function doLogin() {
+    const u = document.getElementById('usernameInput');
+    const p = document.getElementById('passwordInput');
+    const eu = document.getElementById('err-user');
+    const ep = document.getElementById('err-pass');
+    let valid = true;
 
-        eu.classList.remove('show'); u.classList.remove('invalid');
-        ep.classList.remove('show'); p.classList.remove('invalid');
+    eu.classList.remove('show'); u.classList.remove('invalid');
+    ep.classList.remove('show'); p.classList.remove('invalid');
 
-        if (!u.value.trim()) { eu.classList.add('show'); u.classList.add('invalid'); valid = false; }
-        if (!p.value.trim()) { ep.classList.add('show'); p.classList.add('invalid'); valid = false; }
-        if (!valid) return;
-
-        const btn = document.getElementById('signInBtn');
-        btn.textContent = '⏳  Signing in…';
-        btn.disabled = true;
-
-        setTimeout(() => {
-            btn.textContent = '✅  Welcome!';
-            setTimeout(() => {
-                btn.textContent = 'Sign In to Portal ➜';
-                btn.disabled = false;
-            }, 1500);
-        }, 1200);
+    if (!u.value.trim()) { 
+        eu.classList.add('show'); 
+        u.classList.add('invalid'); 
+        valid = false; 
     }
 
-    document.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+    if (!p.value.trim()) { 
+        ep.classList.add('show'); 
+        p.classList.add('invalid'); 
+        valid = false; 
+    }
+
+    if (!valid) return;
+
+    const btn = document.getElementById('signInBtn');
+    btn.textContent = '⏳  Signing in…';
+    btn.disabled = true;
+
+    // Simulate loading then redirect
+    setTimeout(() => {
+        window.location.href = "home.html"; 
+        // change to your actual homepage file
+        // example: "dashboard.html" or "/portal/home.html"
+    }, 1200);
+}
+</script>
 </script>
 </body>
 </html>
