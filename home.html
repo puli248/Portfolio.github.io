@@ -5,34 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Hub - CINEC</title>
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Hub - CINEC</title>
     <style>
          :root {
-            --navy: #003087;
-            --navy-dark: #001f5c;
-            --navy-deeper: #000e35;
-            --navy-mid: #0a1a4a;
-            --blue-accent: #1a56d6;
-            --sky: #4f8ef7;
-            --sky-soft: #7aaeff;
-            --gold: #f5b800;
-            --gold-dark: #c99200;
+            --navy: #0F172A;
+            --navy-dark: #0B1220;
+            --navy-deeper: #0B1220;
+            --navy-mid: #1E293B;
+            --blue-accent: #3B82F6;
+            --sky: #60A5FA;
+            --sky-soft: #93C5FD;
+            --gold: #F59E0B;
+            --gold-dark: #D97706;
             --white: #ffffff;
-            --off-white: #f4f7fb;
-            --text-muted: #6b7a9e;
-            --border: #dde3f0;
+            --off-white: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border: rgba(255,255,255,0.06);
             --sidebar-w: 260px;
-            --bg-dark: #070d19;
-            --card-bg: #005EB8;
-            --accent: #bfd7ee;
+            --bg-dark: #0B1220;
+            --card-bg: #111827;
+            --accent: #F59E0B;
             --text-main: #ffffff;
-            --text-dim: #ffffff;
-            --success: #22c55e;
-            --warning: #ef1515;
-            --transit-blue: #005EB8;
+            --text-dim: #94A3B8;
+            --success: #10B981;
+            --warning: #EF4444;
+            --transit-blue: #1E293B;
         }
         
         * body {
-            background: linear-gradient(180deg, #0B1220 0%, #ffffff 100%);
+            background: #0B1220;
             color: var(--text-main);
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
@@ -49,7 +56,6 @@
             max-width: 4000px;
             padding-bottom: 40px;
         }
-        /* --- Header Section --- */
         
         .welcome-text {
             font-size: 11px;
@@ -67,13 +73,12 @@
         }
         
         .gold-text {
-            color: var(--accent);
+            color: var(--gold);
         }
-        /* --- Engagement Points Card --- */
         
         .points-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #111827;
+            border: 1px solid rgba(255,255,255,0.05);
             border-radius: 20px;
             padding: 20px;
             display: flex;
@@ -83,15 +88,15 @@
         }
         
         .check-in-btn {
-            background: var(--navy-deeper);
+            background: linear-gradient(135deg, #3B82F6, #2563EB);
             border: none;
             padding: 12px 20px;
             border-radius: 12px;
             font-weight: 900;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(243, 176, 50, 0.3);
+            box-shadow: none;
+            color: white;
         }
-        /* --- Navigation Bar --- */
         
         .nav-grid {
             display: grid;
@@ -101,27 +106,27 @@
         }
         
         .nav-item {
-            background: var(--card-bg);
+            background: #111827;
             padding: 15px 2px;
             border-radius: 15px;
             text-align: center;
             font-size: 9px;
             font-weight: bold;
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255,255,255,0.05);
             transition: 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 5px;
+            color: var(--text-muted);
         }
         
         .nav-item.active {
-            background: var(--navy-deeper);
-            color: #000;
-            border-color: var(--navy-deeper);
+            background: linear-gradient(135deg, #3B82F6, #2563EB);
+            color: #ffffff;
+            border-color: transparent;
         }
-        /* --- Page Switching Logic --- */
         
         .page-content {
             display: none;
@@ -133,24 +138,16 @@
         }
         
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        /* --- Shared Card Styles --- */
         
         .card {
             background: #111827;
             border-radius: 22px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
             padding: 80px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
         
         h2 {
@@ -162,13 +159,12 @@
         .live-tag {
             font-size: 10px;
             color: var(--success);
-            background: rgba(34, 197, 94, 0.1);
+            background: rgba(16,185,129,0.1);
             padding: 3px 8px;
             border-radius: 6px;
             margin-left: 8px;
             vertical-align: middle;
         }
-        /* --- Home Page Specifics --- */
         
         .notice {
             background: rgba(239, 68, 68, 0.08);
@@ -176,7 +172,7 @@
             padding: 14px;
             border-radius: 15px;
             font-size: 13px;
-            color: #ff7b7b;
+            color: #fca5a5;
             margin-bottom: 20px;
             display: flex;
             gap: 10px;
@@ -190,7 +186,7 @@
         
         .progress-bg {
             height: 6px;
-            background: #233554;
+            background: #1F2937;
             border-radius: 3px;
             margin: 15px 0 8px 0;
         }
@@ -198,7 +194,7 @@
         .progress-fill {
             height: 100%;
             border-radius: 3px;
-            background: var(--accent);
+            background: var(--gold);
         }
         
         .status-pill {
@@ -208,10 +204,9 @@
             font-size: 11px;
             font-weight: bold;
         }
-        /* --- Transit Page Specifics --- */
         
         .transit-list {
-            background: var(--transit-blue);
+            background: #1E293B;
             border-radius: 20px;
             overflow: hidden;
         }
@@ -220,14 +215,13 @@
             display: flex;
             justify-content: space-between;
             padding: 18px 20px;
-            border-bottom: 1px solid #005EB8;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         
         .time-tag {
-            color: var(--accent);
+            color: var(--sky);
             font-weight: bold;
         }
-        /* --- Clubs Page Specifics --- */
         
         .club-card {
             text-align: center;
@@ -245,17 +239,18 @@
             margin-top: 15px;
             font-weight: bold;
             cursor: pointer;
-            border: 1px solid var(--accent);
+            border: 1px solid var(--blue-accent);
         }
         
         .btn-joined {
-            background: var(--accent);
-            color: #000;
+            background: var(--success);
+            color: #ffffff;
         }
         
         .top- {
-            color: var(--bg-dark);
-            box-shadow: #4e84f1 0px 10px 15px -3px, #2822d9 0px 4px 6px -2px;
+            background: #1E293B;
+            color: var(--text-main);
+            box-shadow: none;
             padding: 30px;
             margin-bottom: 14px;
             border-radius: 16px;
@@ -265,9 +260,10 @@
         
         .btn-join {
             background: transparent;
-            color: var(--navy-deeper);
+            color: var(--sky);
         }
     </style>
+</head>
 </head>
 
 <body>
