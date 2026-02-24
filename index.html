@@ -536,6 +536,18 @@
     }, 1200);
 }
 </script>
+<?php
+  $dsn = "mysql:host=localhost;dbname=campus_hub";
+  $username = "root";
+  $password = "yourpassword";
+
+  try {
+    $conn = new PDO($dsn, $username, $password);
+    echo "Connected successfully";
+  } catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+  }
+?>
 </body>
 </html>
 
