@@ -87,16 +87,21 @@
             margin-bottom: 25px;
         }
         
-        .check-in-btn {
-            background: linear-gradient(135deg, #3B82F6, #2563EB);
-            border: none;
+         .check-in-btn {
+            background: #1E293B; /* dark card tone */
+            border: 1px solid #3B82F6; /* blue outline */
             padding: 12px 20px;
             border-radius: 12px;
             font-weight: 900;
             cursor: pointer;
-            box-shadow: none;
-            color: white;
-        }
+            color: #FFFFFF;
+            transition: 0.25s ease;
+}
+
+        .check-in-btn:hover {
+            background: #3B82F6; /* solid blue on hover */
+            box-shadow: 0 0 14px rgba(59,130,246,0.5); /* soft glow */
+}
         
         .nav-grid {
             display: grid;
